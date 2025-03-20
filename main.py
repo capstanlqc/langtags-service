@@ -14,7 +14,7 @@ def read_root():
     if DUMMY:
         return {"Hello": DUMMY}
     else:
-        return {"Hello": "World"}
+        return {"foo": "bar"}
 
 
 if __name__ == "__main__":

@@ -12,7 +12,7 @@ app = FastAPI(title="Langtags API")
 @app.get("/")  #
 def read_root():
     if DUMMY:
-        return {"Hello": DUMMY}
+        return {"howeya": DUMMY}
     else:
         return {"foo": "bar"}
 

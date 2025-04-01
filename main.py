@@ -8,15 +8,20 @@ load_dotenv()
 DUMMY = os.getenv("DUMMY_VAR")
 result = subprocess.run(["which", "java"], capture_output=True, text=True)
 
+if os.environ["JAVA_HOME"]:
+    java_home = os.environ["JAVA_HOME"]
+else:
+    java_home = None
+
 app = FastAPI(title="railway-tests")
 
 
 @app.get("/")  #
 def read_root():
     return {
-        "java": os.environ["JAVA_HOME"],
+        "java_home": str(java_home),
         "which_java_stdout": str(result.stdout.strip()),
-        "which_java_stderr": str(result.stderr)
+        "which_java_stderr": str(result.stderr),
     }
 
 

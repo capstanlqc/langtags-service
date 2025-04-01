@@ -1,16 +1,7 @@
 #!/bin/bash
-mkdir -p /opt/glibc-2.38
-cd /opt/glibc-2.38
-curl -LO http://ftp.gnu.org/gnu/libc/glibc-2.38.tar.gz
-tar -xzf glibc-2.38.tar.gz
-cd glibc-2.38
-mkdir build
-cd build
-../configure --prefix=/opt/glibc-2.38
-make -j$(nproc)
-make install
-export LD_LIBRARY_PATH=/opt/glibc-2.38/lib:$LD_LIBRARY_PATH
+apt update && apt install -y wget gnupg  
+wget -O- https://packages.adoptium.net/artifactory/api/gpg/key/public | gpg --dearmor | tee /usr/share/keyrings/adoptium-keyring.gpg > /dev/null  
+echo "deb [signed-by=/usr/share/keyrings/adoptium-keyring.gpg] https://packages.adoptium.net/artifactory/deb $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/adoptium.list  
+apt update && apt install -y temurin-21-jdk  
 
-apt-get update
-# apt-get update && apt-get install -y libc6=2.38-1
-apt-get install -y openjdk-21-jdk ant
+apt-get install -y ant

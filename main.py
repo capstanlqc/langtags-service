@@ -8,10 +8,13 @@ load_dotenv()
 DUMMY = os.getenv("DUMMY_VAR")
 result = subprocess.run(["which", "java"], capture_output=True, text=True)
 
-if os.environ["JAVA_HOME"]:
+if os.environ.get("JAVA_HOME"):
+    print("JAVA_HOME is set")
     java_home = os.environ["JAVA_HOME"]
 else:
+    print("JAVA_HOME is not set")
     java_home = None
+
 
 app = FastAPI(title="railway-tests")
 

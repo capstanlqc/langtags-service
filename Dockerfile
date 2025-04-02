@@ -21,8 +21,7 @@ COPY . /app
 
 # Install OpenXLIFF
 RUN git clone https://github.com/rmraya/OpenXLIFF.git /app/opt/OpenXLIFF && \
-    cd /app/opt/OpenXLIFF && ant && \
-    bash /home/souto/Apps/maxprograms/OpenXLIFF/dist/convert.sh -version >/dev/null 2>&1 || exit 1
+    cd /app/opt/OpenXLIFF && ant
 
 # Install Python dependencies
 RUN cd /app

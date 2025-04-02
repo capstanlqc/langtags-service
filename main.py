@@ -1,5 +1,6 @@
 import os
 import subprocess
+from pathlib import Path
 
 from dotenv import load_dotenv
 from fastapi import FastAPI
@@ -25,6 +26,10 @@ else:
     print("ANT_HOME is not set")
     ant_home = None
 
+dist_dpath = Path("/home/souto/Apps/maxprograms/OpenXLIFF/dist")
+
+openxliff_is_installed = True if dist_dpath.exists() else False
+
 
 app = FastAPI(title="railway-tests")
 
@@ -38,6 +43,7 @@ def read_root():
         "ant_home": str(ant_home),
         "ant_version_stdout": str(ant_version.stdout.strip()),
         "ant_version_stderr": str(ant_version.stderr),
+        "openxliff_is_installed": openxliff_is_installed
     }
 
 

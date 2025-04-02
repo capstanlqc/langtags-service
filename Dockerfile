@@ -19,7 +19,13 @@ WORKDIR /app
 # Copy the project files
 COPY . /app
 
+# Install OpenXLIFF
+RUN git clone https://github.com/rmraya/OpenXLIFF.git /app/opt/OpenXLIFF && \
+    cd /app/opt/OpenXLIFF && ant && \
+    bash /home/souto/Apps/maxprograms/OpenXLIFF/dist/convert.sh -version >/dev/null 2>&1 || exit 1
+
 # Install Python dependencies
+RUN cd /app
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Expose the application port

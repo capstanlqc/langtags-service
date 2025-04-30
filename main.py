@@ -126,31 +126,32 @@ else:
     print("ANT_HOME is not set")
     ant_home = None
 
-dist_dpath = Path("/app/opt/OpenXLIFF/dist")
+openxliff_dist_dpath = Path("/app/opt/OpenXLIFF/dist")
 
-openxliff_is_installed = True if dist_dpath.exists() else False
+openxliff_is_installed = True if openxliff_dist_dpath.exists() else False
 
 
-dist_dpath = os.path.join(APP_ROOT, "omegat")
 omtver="5.7.3"
 dist=f"OmegaT_{omtver}_Linux_64"
 # dist_pkg=f"{dist}.tar.bz2"
-java_fpath = os.path.join(APP_ROOT, "omegat", "dist", "jre", "bin", "java")
+omegat_dist_dpath = os.path.join(APP_ROOT, "opt", "omegat", dist)
+java_fpath = os.path.join(APP_ROOT, "opt", "omegat", dist, "jre", "bin", "java")
 
-# omegat bin
-omtjar_fpath = os.path.join(APP_ROOT, "omegat", "dist", "OmegaT.jar")
+# omegat jar
+omtjar_fpath = os.path.join(APP_ROOT, "opt", "omegat", dist, "OmegaT.jar")
 
 # omegat config
-config_dpath = os.path.join(dist_dpath, "config_dir")
+config_dpath = os.path.join(APP_ROOT, "opt", "omegat", "config_dir")
 custom_config_url = "https://cat.capstan.be/OmegaT/v572"
 config_dpath = install_config_bundle(custom_config_url, config_dpath)
 
 print(f"{omtjar_fpath=}")
 print(f"{config_dpath=}")
 print(f"{java_fpath=}")
-    
-    
 
+jre11_is_installed = True if Path(java_fpath).exists() else False
+omegat_is_installed = True if Path(omtjar_fpath).exists() else False
+    
 
 app = FastAPI(title="railway-tests")
 
@@ -167,7 +168,9 @@ def read_root():
         "openxliff_is_installed": openxliff_is_installed,
         "java_fpath": java_fpath,
         "omtjar_fpath": omtjar_fpath,
-        "config_dpath": config_dpath
+        "config_dpath": config_dpath,
+        "jre11_is_installed": jre11_is_installed,
+        "omegat_is_installed": omegat_is_installed
     }
 
 

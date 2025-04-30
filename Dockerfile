@@ -22,7 +22,7 @@ RUN git clone https://github.com/rmraya/OpenXLIFF.git /app/opt/OpenXLIFF && \
     # cd /app/opt/OpenXLIFF && ant
 
 # install omegat
-RUN wget https://cat.capstan.be/OmegaT/exe/5.7.3/OmegaT_5.7.3_Linux_64.tar.bz2 -P /app/opt && tar -xvjf /app/opt/OmegaT_5.7.3_Linux_64.tar.bz2 -C /app/opt && rm /app/opt/OmegaT_5.7.3_Linux_64.tar.bz2
+RUN mkdir -p /app/opt/omegat && wget https://cat.capstan.be/OmegaT/exe/5.7.3/OmegaT_5.7.3_Linux_64.tar.bz2 -P /app/opt && tar -xvjf /app/opt/OmegaT_5.7.3_Linux_64.tar.bz2 -C /app/opt/omegat && rm /app/opt/OmegaT_5.7.3_Linux_64.tar.bz2
 
 # copy the project files
 COPY . /app

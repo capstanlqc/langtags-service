@@ -5,6 +5,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 from fastapi import FastAPI
 
+APP_ROOT = Path.cwd()
+
 load_dotenv()
 DUMMY = os.getenv("DUMMY_VAR")
 
@@ -31,6 +33,27 @@ dist_dpath = Path("/app/opt/OpenXLIFF/dist")
 openxliff_is_installed = True if dist_dpath.exists() else False
 
 
+dist_dpath = os.path.join(APP_ROOT, "omegat")
+omtver="5.7.3"
+dist=f"OmegaT_{omtver}_Linux_64"
+# dist_pkg=f"{dist}.tar.bz2"
+java_fpath = os.path.join(APP_ROOT, "omegat", "dist", "jre", "bin", "java")
+
+# omegat bin
+omtjar_fpath = os.path.join(config.APP_ROOT, "omegat", "dist", "OmegaT.jar")
+
+# omegat config
+config_dpath = os.path.join(dist_dpath, "config_dir")
+custom_config_url = "https://cat.capstan.be/OmegaT/v572"
+config_dpath = install_config_bundle(custom_config_url, config_dpath)
+
+print(f"{omtjar_fpath=}")
+print(f"{config_dpath=}")
+print(f"{java_fpath=}")
+    
+    
+
+
 app = FastAPI(title="railway-tests")
 
 
@@ -44,6 +67,9 @@ def read_root():
         "ant_version_stdout": str(ant_version.stdout.strip()),
         "ant_version_stderr": str(ant_version.stderr),
         "openxliff_is_installed": openxliff_is_installed,
+        "java_fpath": java_fpath,
+        "omtjar_fpath": omtjar_fpath,
+        "config_dpath": config_dpath
     }
 
 

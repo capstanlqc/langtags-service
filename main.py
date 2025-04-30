@@ -40,7 +40,7 @@ dist=f"OmegaT_{omtver}_Linux_64"
 java_fpath = os.path.join(APP_ROOT, "omegat", "dist", "jre", "bin", "java")
 
 # omegat bin
-omtjar_fpath = os.path.join(config.APP_ROOT, "omegat", "dist", "OmegaT.jar")
+omtjar_fpath = os.path.join(APP_ROOT, "omegat", "dist", "OmegaT.jar")
 
 # omegat config
 config_dpath = os.path.join(dist_dpath, "config_dir")
